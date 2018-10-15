@@ -1,0 +1,17 @@
+{
+    "name": "Agrocont",
+    "alias": "agrocont",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 1,
+    "providers": [
+        "Modules\\Agrocont\\Providers\\AgrocontServiceProvider",
+        "Modules\\Agrocont\\Providers\\RouteServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "helpers.php"
+    ],
+    "requires": []
+}
