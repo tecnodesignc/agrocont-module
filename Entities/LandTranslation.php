@@ -4,7 +4,7 @@ namespace Modules\Agrocont\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LandsTranslation extends Model
+class LandTranslation extends Model
 {
     public $timestamps = false;
     protected $fillable = ['name', 'description'];

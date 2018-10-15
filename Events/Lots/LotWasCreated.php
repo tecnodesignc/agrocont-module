@@ -3,7 +3,7 @@
 namespace Modules\Agrocont\Events\Lots;
 
 use Modules\Media\Contracts\StoringMedia;
-use Modules\Agrocont\Entities\Lots;
+use Modules\Agrocont\Entities\Lot;
 
 class LotWasCreated implements StoringMedia
 {
@@ -16,7 +16,7 @@ class LotWasCreated implements StoringMedia
      */
     public $land;
 
-    public function __construct(Lots $land, array $data)
+    public function __construct(Lot $land, array $data)
     {
         $this->data = $data;
         $this->land = $land;

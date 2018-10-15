@@ -2,7 +2,7 @@
 
 namespace Modules\Agrocont\Events\Lots;
 
-use Modules\Agrocont\Entities\Lots;
+use Modules\Agrocont\Entities\Lot;
 
 class LotWasDeleted
 {

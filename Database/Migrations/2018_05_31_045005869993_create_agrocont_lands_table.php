@@ -34,6 +34,9 @@ class CreateAgrocontLandsTable extends Migration
      */
     public function down()
     {
+        Schema::table('agrocont__lands', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
         Schema::dropIfExists('agrocont__lands');
     }
 }

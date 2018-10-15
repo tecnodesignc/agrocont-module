@@ -3,7 +3,7 @@
 namespace Modules\Agrocont\Events\Lands;
 
 use Modules\Media\Contracts\StoringMedia;
-use Modules\Agrocont\Entities\Lands;
+use Modules\Agrocont\Entities\Land;
 
 class LandWasUpdated implements StoringMedia
 {
@@ -16,7 +16,7 @@ class LandWasUpdated implements StoringMedia
      */
     public $land;
 
-    public function __construct(Lands $land, array $data)
+    public function __construct(Land $land, array $data)
     {
         $this->data = $data;
         $this->land = $land;

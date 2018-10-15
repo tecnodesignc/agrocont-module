@@ -11,45 +11,48 @@ use Modules\Core\Traits\NamespacedEntity;
 use Modules\Media\Entities\File;
 use Modules\Media\Support\Traits\MediaRelation;
 
-class Crops extends Model
+class Lot extends Model
 {
     use Translatable, MediaRelation, PresentableTrait, NamespacedEntity;
 
-    protected $table = 'agrocont__crops';
-    public $translatedAttributes = ['name','description'];
-    protected $fillable = ['name','description','area','status','type','quantity','unit','startdate','enddate','options','user_id'];
+    protected $table = 'agrocont__lots';
+    public $translatedAttributes = ['name'];
+    protected $fillable = ['name', 'status', 'area', 'slope', 'texture', 'thickness', 'land_id'];
     protected $fakeColumns = ['options'];
-    protected $presenter = CropsPresenter::class;
-    protected static $entityNamespace = 'encorecms/crops';
+    protected $presenter = LandPresenter::class;
+    protected static $entityNamespace = 'encorecms/lot';
     /**
      * The attributes that should be casted to native types
      * @var array
      */
     protected $casts = [
-        'options' => 'array',
         'status' => 'int',
         'type' => 'int',
     ];
-
     /**
+     * Relation Products Entities
      * @return mixed
      */
-    public function user()
+    public function Lands()
     {
-        $driver = config('asgard.user.config.driver');
-
-        return $this->belongsTo("Modules\\User\\Entities\\{$driver}\\User");
+        return $this->belongsTo(Land::class);
     }
 
-
+    public function Crops()
+    {
+        return $this->hasMany(Crops::class);
+    }
     /**
-     * @param $value
-     * @return mixed
+     * Get the thumbnail image for the current blog post
+     * @return File|string
      */
-    public function getOptionsAttribute($value) {
-
-        return json_decode(json_decode($value));
-
+    public function getThumbnailAttribute()
+    {
+        $thumbnail = $this->files()->where('zone', 'thumbnail')->first();
+        if ($thumbnail === null) {
+            return '';
+        }
+        return $thumbnail;
     }
     /**
      * Check if the post is in draft
@@ -78,7 +81,7 @@ class Crops extends Model
     public function __call($method, $parameters)
     {
         #i: Convert array to dot notation
-        $config = implode('.', ['asgard.agrocont.config.crops.relations', $method]);
+        $config = implode('.', ['asgard.agrocont.config.lot.relations', $method]);
         #i: Relation method resolver
         if (config()->has($config)) {
             $function = config()->get($config);

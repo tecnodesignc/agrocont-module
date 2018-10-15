@@ -65,7 +65,7 @@ class AgrocontServiceProvider extends ServiceProvider
         $this->app->bind(
             'Modules\Agrocont\Repositories\LandsRepository',
             function () {
-                $repository = new \Modules\Agrocont\Repositories\Eloquent\EloquentLandsRepository(new \Modules\Agrocont\Entities\Lands());
+                $repository = new \Modules\Agrocont\Repositories\Eloquent\EloquentLandsRepository(new \Modules\Agrocont\Entities\Land());
 
                 if (! config('app.cache')) {
                     return $repository;
@@ -77,7 +77,7 @@ class AgrocontServiceProvider extends ServiceProvider
         $this->app->bind(
             'Modules\Agrocont\Repositories\LotsRepository',
             function () {
-                $repository = new \Modules\Agrocont\Repositories\Eloquent\EloquentLotsRepository(new \Modules\Agrocont\Entities\Lots());
+                $repository = new \Modules\Agrocont\Repositories\Eloquent\EloquentLotsRepository(new \Modules\Agrocont\Entities\Lot());
 
                 if (! config('app.cache')) {
                     return $repository;

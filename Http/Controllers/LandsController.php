@@ -4,7 +4,7 @@ namespace Modules\Agrocont\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Agrocont\Entities\Lands;
+use Modules\Agrocont\Entities\Land;
 use Modules\Agrocont\Http\Requests\CreateLandsRequest;
 use Modules\Agrocont\Http\Requests\UpdateLandsRequest;
 use Modules\Agrocont\Repositories\LandsRepository;
@@ -69,10 +69,10 @@ class LandsController extends BasePublicController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Lands $land
+     * @param  Land $land
      * @return Response
      */
-    public function edit(Lands $land)
+    public function edit(Land $land)
     {
         $tpl = 'agrocont::front.lands.edit';
         $ttpl='lands.edit';
@@ -83,11 +83,11 @@ class LandsController extends BasePublicController
     /**
      * Update the specified resource in storage.
      *
-     * @param  Lands $lands
+     * @param  Land $lands
      * @param  UpdateLandsRequest $request
      * @return Response
      */
-    public function update(Lands $lands, UpdateLandsRequest $request)
+    public function update(Land $lands, UpdateLandsRequest $request)
     {
         $this->lands->update($lands, $request->all());
 
@@ -98,10 +98,10 @@ class LandsController extends BasePublicController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Lands $lands
+     * @param  Land $lands
      * @return Response
      */
-    public function destroy(Lands $lands)
+    public function destroy(Land $lands)
     {
         $this->lands->destroy($lands);
 

@@ -4,7 +4,7 @@ namespace Modules\Agrocont\Events\Lands;
 
 use Modules\Core\Contracts\EntityIsChanging;
 use Modules\Core\Events\AbstractEntityHook;
-use Modules\Agrocont\Entities\Lands;
+use Modules\Agrocont\Entities\Land;
 
 class LandIsUpdating extends AbstractEntityHook implements EntityIsChanging
 {
@@ -13,7 +13,7 @@ class LandIsUpdating extends AbstractEntityHook implements EntityIsChanging
      */
     private $land;
 
-    public function __construct(Lands $land, array $attributes)
+    public function __construct(Land $land, array $attributes)
     {
         $this->land = $land;
         parent::__construct($attributes);

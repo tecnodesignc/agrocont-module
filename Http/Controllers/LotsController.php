@@ -4,7 +4,7 @@ namespace Modules\Agrocont\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Agrocont\Entities\Lots;
+use Modules\Agrocont\Entities\Lot;
 use Modules\Agrocont\Http\Requests\CreateLotsRequest;
 use Modules\Agrocont\Http\Requests\UpdateLotsRequest;
 use Modules\Agrocont\Repositories\LandsRepository;
@@ -76,10 +76,10 @@ class LotsController extends BasePublicController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Lots $lots
+     * @param  Lot $lots
      * @return Response
      */
-    public function edit(Lots $lots)
+    public function edit(Lot $lots)
     {
         return view('agrocont::admin.lots.edit', compact('lots'));
     }
@@ -87,11 +87,11 @@ class LotsController extends BasePublicController
     /**
      * Update the specified resource in storage.
      *
-     * @param  Lots $lots
+     * @param  Lot $lots
      * @param  UpdateLotsRequest $request
      * @return Response
      */
-    public function update(Lots $lots, UpdateLotsRequest $request)
+    public function update(Lot $lots, UpdateLotsRequest $request)
     {
         $this->lots->update($lots, $request->all());
 
@@ -102,10 +102,10 @@ class LotsController extends BasePublicController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Lots $lots
+     * @param  Lot $lots
      * @return Response
      */
-    public function destroy(Lots $lots)
+    public function destroy(Lot $lots)
     {
         $this->lots->destroy($lots);
 

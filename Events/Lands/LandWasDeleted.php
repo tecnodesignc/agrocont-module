@@ -2,7 +2,7 @@
 
 namespace Modules\Agrocont\Events\Lands;
 
-use Modules\Agrocont\Entities\Lands;
+use Modules\Agrocont\Entities\Land;
 
 class LandWasDeleted
 {

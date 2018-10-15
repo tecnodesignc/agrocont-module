@@ -4,9 +4,9 @@ namespace Modules\Agrocont\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LotsTranslation extends Model
+class LotTranslation extends Model
 {
     public $timestamps = false;
-    protected $fillable = [];
+    protected $fillable = ['name'];
     protected $table = 'agrocont__lots_translations';
 }

@@ -2,7 +2,7 @@
 
 namespace Modules\Agrocont\Repositories\Eloquent;
 
-use Modules\Agrocont\Entities\Lands;
+use Modules\Agrocont\Entities\Land;
 use Modules\Agrocont\Events\Lands\LandIsCreating;
 use Modules\Agrocont\Events\Lands\LandIsUpdating;
 use Modules\Agrocont\Events\Lands\LandWasCreated;
