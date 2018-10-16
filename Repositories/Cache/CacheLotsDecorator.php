@@ -13,4 +13,10 @@ class CacheLotsDecorator extends BaseCacheDecorator implements LotsRepository
         $this->entityName = 'agrocont.lots';
         $this->repository = $lots;
     }
+    public function whereFilter($page, $take, $filter, $include)
+    {
+        return $this->remember(function ($page, $take, $filter, $include) {
+            return $this->repository->whereFilter($page, $take, $filter, $include);
+        });
+    }
 }

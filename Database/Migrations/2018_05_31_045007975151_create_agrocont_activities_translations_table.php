@@ -18,10 +18,10 @@ class CreateAgrocontActivitiesTranslationsTable extends Migration
             // Your translatable fields
             $table->string('title');
             $table->text('description');
-            $table->integer('activities_id')->unsigned();
+            $table->integer('activity_id')->unsigned();
             $table->string('locale')->index();
-            $table->unique(['activities_id', 'locale']);
-            $table->foreign('activities_id')->references('id')->on('agrocont__activities')->onDelete('cascade');
+            $table->unique(['activity_id', 'locale']);
+            $table->foreign('activity_id')->references('id')->on('agrocont__activities')->onDelete('cascade');
         });
     }
 
@@ -33,7 +33,7 @@ class CreateAgrocontActivitiesTranslationsTable extends Migration
     public function down()
     {
         Schema::table('agrocont__activities_translations', function (Blueprint $table) {
-            $table->dropForeign(['activities_id']);
+            $table->dropForeign(['activity_id']);
         });
         Schema::dropIfExists('agrocont__activities_translations');
     }

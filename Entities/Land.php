@@ -27,6 +27,7 @@ class Land extends Model
      */
     protected $casts = [
         'options' => 'array',
+        'address'=>'array',
         'status' => 'int',
         'type' => 'int',
     ];
