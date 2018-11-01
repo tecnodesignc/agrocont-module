@@ -32,7 +32,7 @@ class LandsController extends BasePublicController
     public function index()
     {
         $user = $this->auth->user();
-        $lands= $this->lands->wherebyUser($user->id);
+        $lands = $this->lands->wherebyUser($user->id);
         $tpl = 'agrocont::frontend.lands.index';
         $ttpl = 'lands.index';
 
@@ -43,12 +43,13 @@ class LandsController extends BasePublicController
     public function select(Request $request)
     {
         $user = $this->auth->user();
-        $land = $this->lands->find($request->userLand);
-        if ($land->user->id == $user->id) {
+        $land = $this->lands->find($request->land);
+        $usersid=$land->users->pluck('id')->toArray();
+        if (3) {
             $request->session()->put('land', $land->id);
         }
 
-        return Redirect::back();
+        return redirect()->route('homepage');
     }
 
     /**
@@ -58,6 +59,7 @@ class LandsController extends BasePublicController
      */
     public function create()
     {
+
         $tpl = 'agrocont::frontend.lands.create';
         $ttpl = 'agrocont.frontend.lands.create';
         view()->exists($ttpl) ? $tpl = $ttpl : $tpl;
@@ -66,15 +68,14 @@ class LandsController extends BasePublicController
         if (session()->has('land')) {
             $value = session()->get('land');
             $land = $this->land->find($value);
-            if($land->user_id == $user->id){
+            if ($land->user_id == $user->id) {
                 return view($tpl);
-            }else{
+            } else {
                 return view('agrocont::frontend.lands.logcreate');
             }
-        }else{
+        } else {
             return view('agrocont::frontend.lands.logcreate');
         }
-
 
 
     }
@@ -87,11 +88,20 @@ class LandsController extends BasePublicController
      */
     public function store(CreateLandsRequest $request)
     {
+        $user = $this->auth->user();
+        $request['users']=[$user->id];
+        $request['status']=1;
+        $land = $this->lands->create($request->all());
+        if (session()->has('land')) {
+            return redirect()->route('agrocont.lands.index')
+                ->withSuccess(trans('core::core.messages.resource created', ['name' => trans('agrocont::lands.title.lands')]));
+        } else {
+            $request->session()->put('land', $land->id);
+            return redirect()->route('homepage')
+                ->withSuccess(trans('core::core.messages.resource created', ['name' => trans('agrocont::lands.title.lands')]));
 
-        $this->lands->create($request->all());
+        }
 
-        return redirect()->route('agrocont.lands.index')
-            ->withSuccess(trans('core::core.messages.resource created', ['name' => trans('agrocont::lands.title.lands')]));
     }
 
     /**
@@ -137,9 +147,10 @@ class LandsController extends BasePublicController
             ->withSuccess(trans('core::core.messages.resource deleted', ['name' => trans('agrocont::lands.title.lands')]));
     }
 
-    public function view(){
+    public function view()
+    {
         $user = $this->auth->user();
-        $lands= $this->lands->wherebyUser($user->id);
+        $lands = $this->lands->wherebyUser($user->id);
         $tpl = 'agrocont::frontend.lands.select';
         $ttpl = 'agrocont.frontend.lands.select';
         view()->exists($ttpl) ? $tpl = $ttpl : $tpl;

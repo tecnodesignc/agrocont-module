@@ -26,19 +26,16 @@
                     {!! Form::open(['route' => ['agrocont.lots.store'], 'method' => 'post']) !!}
                     <div class="col-xs-12 col-sm-9 col-md-8">
                         <div class="p-20">
-
                             @include('partials.form-tab-headers')
                             <div class="tab-content">
                                 <?php $i = 0; ?>
                                 @foreach (LaravelLocalization::getSupportedLocales() as $locale => $language)
                                     <?php $i++; ?>
                                     <div class="tab-pane {{ locale() == $locale ? 'active' : '' }}" id="tab_{{ $i }}">
-                                        @include('lots.frontend.partials.create-fields', ['lang' => $locale])
+                                        @include('agrocont::frontend.lots.partials.create-fields', ['lang' => $locale])
                                     </div>
                                 @endforeach
                             </div>
-                            'name', 'status', 'area', 'slope', 'texture', 'thickness', 'land_id'
-
                             <div class="form-group {{ $errors->has("area") ? ' has-error' : '' }}'">
                                 <label>{{trans('agrocont::lots.form.area')}}</label>
                                 <div>
@@ -53,19 +50,25 @@
                             <div class="form-group {{ $errors->has("slope") ? ' has-error' : '' }}'">
 
                                 <label class="control-label">{{trans('agrocont::lots.form.slope')}}</label>
-                                <input id="slope" type="number" value="10" name="slope">
+                                <input id="slope" type="number" value="{{old('slope')}}" name="slope">
                                 {!! $errors->first("slope", '<span class="help-block">:message</span>') !!}
                             </div>
                             <div class="form-group {{ $errors->has("texture") ? ' has-error' : '' }}'">
 
                                 <label class="control-label">{{trans('agrocont::lots.form.texture')}}</label>
+
+                                @php
+                                    $oldCat = array();
+                                    $oldCat=old('texture');
+                                @endphp
+
                                 <select class="select2 form-control select2-multiple" name="texture" id="texture"
                                         multiple="multiple"
                                         data-placeholder="{{trans('agrocont::lots.form.select ')}} ...">
-                                    <option value="1">Arenoso</option>
-                                    <option value="2">Fanco</option>
-                                    <option value="3">Limoso</option>
-                                    <option value="4">Arcilloso</option>
+                                    <option value="1" @isset($oldCat) @if(in_array(1, $oldCat)) checked="checked" @endif @endisset>Arenoso</option>
+                                    <option value="2" @isset($oldCat) @if(in_array(2, $oldCat)) checked="checked" @endif @endisset>Fanco</option>
+                                    <option value="3" @isset($oldCat) @if(in_array(3, $oldCat)) checked="checked" @endif @endisset>Limoso</option>
+                                    <option value="4" @isset($oldCat) @if(in_array(4, $oldCat)) checked="checked" @endif @endisset>Arcilloso</option>
                                 </select>
                             </div>
                             <div class="form-group {{ $errors->has("thickness") ? ' has-error' : '' }}'">
@@ -75,7 +78,7 @@
                                            name="thickness"
                                            value="{{ old("thickness")}}"
                                            class="form-control" required
-                                           />
+                                    />
                                     {!! $errors->first("thickness", '<span class="help-block">:message</span>') !!}
                                 </div>
                             </div>
@@ -99,13 +102,13 @@
                                 <label>Estado *:</label>
 
                                 <div class="radio">
-                                    <input type="radio" name="status" id="statusI" value="0">
+                                    <input type="radio" name="status" id="statusI" value="0" {{ old('status',0) == 0? 'checked' : '' }}>
                                     <label for="status">
                                         Inactivo
                                     </label>
                                 </div>
                                 <div class="radio">
-                                    <input type="radio" name="status" id="statusA" value="1">
+                                    <input type="radio" name="status" id="statusA" value="1" {{ old('status',0) == 1? 'checked' : '' }}>
                                     <label for="status">
                                         Activo
                                     </label>

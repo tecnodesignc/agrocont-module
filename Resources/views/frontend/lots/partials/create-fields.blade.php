@@ -5,6 +5,3 @@
         {!! $errors->first("$lang.name", '<span class="help-block">:message</span>') !!}
     </div>
 </div>
-
-
-

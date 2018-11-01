@@ -2,11 +2,11 @@
     $lands = ladsByUser($currentUser->id);
 @endphp
 
-    <li class="dropdown hidden-xs">
+    <li class="dropdown hidden-xs" style="margin-top: 14px">
         {!! Form::open(['route' => ['agrocont.lands.userLand'], 'method' => 'post']) !!}
-        <select class="selectpicker hidden-xs" data-style="btn-custom" onchange="this.form.submit()">
+        <select class="selectpicker hidden-xs" name="land" data-style="btn-custom" onchange="this.form.submit()">
             @foreach($lands as $land)
-                <option value="{{$land->id}}" {{session('land')==$land->id?'selected':''}}>{{$land->title}}</option>
+                <option value="{{$land->id}}" {{session('land')==$land->id?'selected':''}}>{{$land->name}}</option>
             @endforeach
         </select>
         {!! Form::close() !!}

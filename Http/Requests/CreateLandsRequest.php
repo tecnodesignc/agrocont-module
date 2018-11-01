@@ -13,7 +13,10 @@ class CreateLandsRequest extends BaseFormRequest
 
     public function translationRules()
     {
-        return [];
+        return [
+            'name'=>'required',
+            'description'=>'required'
+        ];
     }
 
     public function authorize()
@@ -28,6 +31,11 @@ class CreateLandsRequest extends BaseFormRequest
 
     public function translationMessages()
     {
-        return [];
+        return [
+            'name.required' => trans('agrocont::common.messages.name is required'),
+            'name.min2'=>trans('agrocont::common.messages.name is min '),
+            'description.required' => trans('agrocont::common.messages.description is required'),
+            'description.min2'=>trans('agrocont::common.messages.description is min '),
+        ];
     }
 }

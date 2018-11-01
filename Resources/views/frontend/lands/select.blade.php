@@ -28,7 +28,7 @@
                                 <div class="col-xs-12">
                                     <select name="land" class="selectpicker hidden-xs" data-style="btn-custom">
                                         @foreach($lands as $land)
-                                            <option value="{{$land->id}}" {{old('land')==$land->id?'selected':''}}>{{$land->title}}</option>
+                                            <option value="{{$land->id}}" {{old('land')==$land->id?'selected':''}}>{{$land->name}}</option>
                                         @endforeach
                                     </select>
                                     {!! $errors->first('land', '<span class="help-block">:message</span>') !!}

@@ -37,7 +37,7 @@ class EloquentLandsRepository extends EloquentBaseRepository implements LandsRep
 
         event($event = new LandIsCreating($data));
         $land = $this->model->create($event->getAttributes());
-        $land->users()->sync($data->users);
+        $land->users()->sync(array_get($data, 'users', []));
         event(new LandWasCreated($land, $data));
         
 

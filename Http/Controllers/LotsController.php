@@ -38,6 +38,7 @@ class LotsController extends BasePublicController
     public function index()
     {
         $lots = $this->lots->all();
+        dd('jljl' );
         $tpl = 'agrocont::frontend.lots.index';
         $ttpl = 'lots.frontend.index';
         view()->exists($ttpl) ? $tpl = $ttpl : $tpl;
@@ -67,9 +68,11 @@ class LotsController extends BasePublicController
      */
     public function store(CreateLotsRequest $request)
     {
+        $request['land_id']=session()->get('land');
+
         $this->lots->create($request->all());
 
-        return redirect()->route('admin.agrocont.lots.index')
+        return redirect()->route('agrocont.lots.index')
             ->withSuccess(trans('core::core.messages.resource created', ['name' => trans('agrocont::lots.title.lots')]));
     }
 
