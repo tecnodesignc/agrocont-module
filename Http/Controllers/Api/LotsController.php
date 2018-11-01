@@ -115,7 +115,7 @@ class LotsController extends BaseApiController
                 $options = (array)$request->options ?? array();
                 isset($request->mainimage) ? $options["mainimage"] = saveImage($request['mainimage'], "assets/agrocont/lot/" . $lot->id . ".jpg") : false;
                 $request['options'] = json_encode($options);
-                $lot = $this->lots->update($lot, $request->all());
+                $lot = $this->lots->update($lot, $request->attributes);
                 $status = 200;
                 $response = [
                     'susses' => [

@@ -7,6 +7,7 @@ use Modules\Core\Traits\CanPublishConfiguration;
 use Modules\Core\Events\BuildingSidebar;
 use Modules\Core\Events\LoadingBackendTranslations;
 use Modules\Agrocont\Events\Handlers\RegisterAgrocontSidebar;
+use Modules\Agrocont\Http\Middleware\LandInMiddleware;
 
 class AgrocontServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,15 @@ class AgrocontServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $defer = false;
+
+
+    /**
+     * @var array
+     */
+    protected $middleware = [
+        'land.in' => LandInMiddleware::class
+    ];
+
 
     /**
      * Register the service provider.

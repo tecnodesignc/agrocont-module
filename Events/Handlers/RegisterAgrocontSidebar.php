@@ -79,15 +79,6 @@ class RegisterAgrocontSidebar implements \Maatwebsite\Sidebar\SidebarExtender
                         $this->auth->hasAccess('agrocont.activities.index')
                     );
                 });
-                $item->item(trans('agrocont::products.title.products'), function (Item $item) {
-                    $item->icon('fa fa-copy');
-                    $item->weight(0);
-                    $item->append('admin.agrocont.products.create');
-                    $item->route('admin.agrocont.products.index');
-                    $item->authorize(
-                        $this->auth->hasAccess('agrocont.products.index')
-                    );
-                });
               
 // append
 

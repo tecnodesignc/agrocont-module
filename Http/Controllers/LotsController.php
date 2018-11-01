@@ -38,8 +38,8 @@ class LotsController extends BasePublicController
     public function index()
     {
         $lots = $this->lots->all();
-        $tpl = 'agrocont::front.lots.index';
-        $ttpl = 'lots.index';
+        $tpl = 'agrocont::frontend.lots.index';
+        $ttpl = 'lots.frontend.index';
         view()->exists($ttpl) ? $tpl = $ttpl : $tpl;
         return view($tpl, compact('lots'));
     }
@@ -51,12 +51,12 @@ class LotsController extends BasePublicController
      */
     public function create()
     {
-        $lands = $this->lands->wherebyUser($this->auth->user()->id);
-        $lots =$this->lots->wherebyland($lands->id);
-        $tpl = 'agrocont::front.lots.create';
-        $ttpl = 'lots.create';
+       // $lands = $this->lands->wherebyUser($this->auth->user()->id);
+       // $lots =$this->lots->wherebyland($lands->id);
+        $tpl = 'agrocont::frontend.lots.create';
+        $ttpl = 'lots.frontend.createe';
         view()->exists($ttpl) ? $tpl = $ttpl : $tpl;
-        return view($tpl,compact('lands','lots'));
+        return view($tpl);
     }
 
     /**

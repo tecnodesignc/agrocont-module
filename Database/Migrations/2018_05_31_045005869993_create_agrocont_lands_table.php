@@ -20,8 +20,6 @@ class CreateAgrocontLandsTable extends Migration
             $table->text('options')->default('')->nullable();
             $table->integer('type')->default(0)->unsigned();
             $table->integer('status')->default(0)->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on(config('auth.table', 'users'))->onDelete('restrict');
 
 
             $table->timestamps();
@@ -35,9 +33,6 @@ class CreateAgrocontLandsTable extends Migration
      */
     public function down()
     {
-        Schema::table('agrocont__lands', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-        });
         Schema::dropIfExists('agrocont__lands');
     }
 }

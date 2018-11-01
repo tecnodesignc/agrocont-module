@@ -27,7 +27,7 @@ $router->group(['prefix' =>'/agrocont'], function (Router $router) {
         $router->put('{alands}', [
             'as' => 'admin.agrocont.lands.update',
             'uses' => 'LandsController@update',
-            //'middleware' => 'auth:api'
+            'middleware' => ['auth:api']
         ]);
         $router->delete('{alands}', [
             'as' => 'admin.agrocont.lands.destroy',

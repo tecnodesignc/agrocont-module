@@ -37,6 +37,16 @@ $router->group(['prefix' =>'lands'], function (Router $router) {
         'uses' => 'LandsController@destroy',
         'middleware' => 'can:agrocont.lands.destroy'
     ]);
+    $router->get('select', [
+        'as' => 'agrocont.lands.select',
+        'uses' => 'LandsController@view',
+        'middleware' => 'can:agrocont.lands.index'
+    ]);
+    $router->post('select', [
+        'as' => 'agrocont.lands.userLand',
+        'uses' => 'LandsController@select',
+        'middleware' => 'can:agrocont.lands.index'
+    ]);
 });
 $router->group(['prefix' =>'lots'], function (Router $router) {
     $router->bind('lots', function ($id) {

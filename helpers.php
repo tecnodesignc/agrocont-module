@@ -35,6 +35,12 @@ function countCrops(){
     return  $crops->count();
 }
 
+if (!function_exists('ladsByUser')){
+    function ladsByUser($id){
+        return app('Modules\Agrocont\Repositories\LandsRepository')->wherebyUser($id);
+    }
+}
+
 if (!function_exists('saveImage')) {
     function saveImage($value, $destination_path, $disk='publicmedia', $size = array(), $watermark = array())
     {

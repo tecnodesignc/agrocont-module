@@ -37,7 +37,7 @@ class EloquentLandsRepository extends EloquentBaseRepository implements LandsRep
 
         event($event = new LandIsCreating($data));
         $land = $this->model->create($event->getAttributes());
-
+        $land->users()->sync($data->users);
         event(new LandWasCreated($land, $data));
         
 
@@ -54,7 +54,7 @@ class EloquentLandsRepository extends EloquentBaseRepository implements LandsRep
    
         event($event = new LandIsUpdating($model, $data));
         $model->update($event->getAttributes());
-
+        $model->users()->sync($data->users);
         event(new LandWasUpdated($model, $data));
 
         return $model;
@@ -77,7 +77,8 @@ class EloquentLandsRepository extends EloquentBaseRepository implements LandsRep
         if (count($include)) {
             //Include relationships for default
             $includeDefault = [
-                'user'
+                'user',
+                'translates'
             ];
             $query->with(array_merge($includeDefault, $include));
         }
@@ -151,7 +152,11 @@ class EloquentLandsRepository extends EloquentBaseRepository implements LandsRep
      * @return mixed
      */
     public function wherebyUser($id){
-        return $this->model->where('user_id',$id)->get();
+
+        return $this->model->whereHas('users', function ($q) use ($id) {
+            $q->where('user_id', $id);
+        })->with('users')->get();
+
     }
 
 

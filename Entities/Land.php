@@ -17,7 +17,7 @@ class Land extends Model
 
     protected $table = 'agrocont__lands';
     public $translatedAttributes = ['name', 'description'];
-    protected $fillable = ['name', 'description', 'status','address', 'type', 'user_id'];
+    protected $fillable = ['name', 'description', 'status','address', 'type'];
     protected $fakeColumns = ['options'];
     protected $presenter = LandPresenter::class;
     protected static $entityNamespace = 'encorecms/lands';
@@ -35,11 +35,11 @@ class Land extends Model
     /**
      * @return mixed
      */
-    public function user()
+    public function users()
     {
         $driver = config('asgard.user.config.driver');
 
-        return $this->belongsTo("Modules\\User\\Entities\\{$driver}\\User");
+        return $this->belongsToMany("Modules\\User\\Entities\\{$driver}\\User",'agrocont__user_land')->withTimestamps();
     }
 
 

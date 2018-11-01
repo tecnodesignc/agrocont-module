@@ -10,6 +10,7 @@ namespace Modules\Agrocont\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\User\Transformers\UserTransformer;
 
 
 class LandsTransformer extends Resource
@@ -23,8 +24,8 @@ class LandsTransformer extends Resource
             'status' => $this->status,
             'address' => $this->address,
             'type' => $this->type,
-            'user'=>$this->user->present()->fullname(),
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            "users"=>UserTransformer::collection($this->users)
         ];
     }
 }
